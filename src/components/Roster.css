@@ -1,0 +1,255 @@
+.roster {
+    padding: var(--section-padding) 0;
+    background: linear-gradient(to bottom, var(--color-dark), var(--color-surface));
+}
+
+.roster-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.roster-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.roster-description {
+    max-width: 400px;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+}
+
+/* Grid */
+.roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* Player Card */
+.player-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    perspective: 1000px;
+    animation: fadeInUp 0.6s var(--transition-smooth) backwards;
+    animation-delay: var(--delay);
+}
+
+.card-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg,
+            var(--color-accent) 0%,
+            var(--color-gold) 50%,
+            var(--color-hot-pink) 100%);
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 0.4s var(--transition-smooth);
+    z-index: -1;
+}
+
+.player-card:hover .card-glow {
+    opacity: 0.5;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg,
+            rgba(0, 255, 135, 0.15) 0%,
+            rgba(13, 31, 13, 0.95) 30%,
+            var(--color-primary) 100%);
+    border: 1px solid rgba(0, 255, 135, 0.2);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.4s var(--transition-smooth);
+}
+
+.player-card:hover .card-inner {
+    transform: translateY(-8px);
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.player-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rating-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--color-gold);
+}
+
+.rating-position {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+}
+
+.player-nationality {
+    font-size: 1.75rem;
+}
+
+/* Player Image */
+.player-image {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem 0;
+    overflow: hidden;
+}
+
+.player-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(30%) contrast(1.1);
+    transition: all 0.4s var(--transition-smooth);
+}
+
+.player-card:hover .player-image img {
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            var(--color-primary) 0%,
+            transparent 60%);
+}
+
+/* Player Info */
+.player-info {
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.player-number {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--color-text-dim);
+}
+
+.player-name {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-text);
+    margin-top: 0.25rem;
+}
+
+/* Stats */
+.player-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-text);
+}
+
+.stat-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--color-text-dim);
+}
+
+/* Holographic Effect */
+.card-holo {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(125deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.05) 75%,
+            transparent 100%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--transition-smooth);
+}
+
+.player-card:hover .card-holo {
+    opacity: 1;
+    animation: holoShine 1.5s ease-in-out infinite;
+}
+
+@keyframes holoShine {
+    0% {
+        transform: translateX(-100%) rotate(25deg);
+    }
+
+    100% {
+        transform: translateX(200%) rotate(25deg);
+    }
+}
+
+/* CTA */
+.roster-cta {
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .roster-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .card-inner {
+        padding: 1rem;
+    }
+
+    .rating-number {
+        font-size: 2rem;
+    }
+
+    .player-name {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .roster-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

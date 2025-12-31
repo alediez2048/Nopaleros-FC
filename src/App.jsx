@@ -1,28 +1,24 @@
-import { useState } from 'react'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
-import Sponsors from './components/Sponsors'
+import About from './components/About'
 import Roster from './components/Roster'
+import Fixtures from './components/Fixtures'
+import Sponsors from './components/Sponsors'
+import Footer from './components/Footer'
+import './App.css'
 
 function App() {
   return (
-    <div className="app-wrapper">
+    <div className="app noise-overlay">
       <Navbar />
-      <Hero />
-      <Sponsors />
       <main>
-        {/* About / Philosophy Section will go here */}
-        <section style={{ padding: '4rem 0', textAlign: 'center' }}>
-          <h2 style={{ color: 'var(--color-neon)', marginBottom: '1rem' }}>Siempre Espinosos</h2>
-          <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.5rem', opacity: 0.8 }}>
-            "Winning is not for everyone."
-          </p>
-        </section>
+        <Hero />
+        <About />
         <Roster />
+        <Fixtures />
+        <Sponsors />
       </main>
-      <footer style={{ padding: '2rem', textAlign: 'center', borderTop: '1px solid #333', marginTop: '4rem' }}>
-        <p>© 2025 Club Deportivo Nopaleros. Stay Pricked Up.</p>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -1,80 +1,95 @@
-import React from 'react'
-import heroBg from '../assets/images/hero-bg.png'
+import { useEffect, useRef } from 'react'
+import './Hero.css'
 
 const Hero = () => {
+    const heroRef = useRef(null)
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            if (!heroRef.current) return
+            const { clientX, clientY } = e
+            const { innerWidth, innerHeight } = window
+            const x = (clientX / innerWidth - 0.5) * 20
+            const y = (clientY / innerHeight - 0.5) * 20
+            heroRef.current.style.setProperty('--mouse-x', `${x}px`)
+            heroRef.current.style.setProperty('--mouse-y', `${y}px`)
+        }
+        window.addEventListener('mousemove', handleMouseMove)
+        return () => window.removeEventListener('mousemove', handleMouseMove)
+    }, [])
+
     return (
-        <div style={{
-            position: 'relative',
-            height: '100vh',
-            width: '100vw',
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column'
-        }}>
-            {/* Background Layer - Placeholder for Video */}
-            <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                zIndex: -2,
-                backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), var(--color-dark)), url(${heroBg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}>
-                {/* If we had a video, it would go here:
-        <video autoPlay loop muted playsInline style={{ objectFit: 'cover', width: '100%', height: '100%' }}>
-          <source src="/path/to/video.mp4" type="video/mp4" />
-        </video>
-        */}
+        <section className="hero" ref={heroRef}>
+            {/* Background Video/Image */}
+            <div className="hero-media">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1920&q=80"
+                >
+                    <source
+                        src="https://cdn.coverr.co/videos/coverr-soccer-ball-on-grass-2200/1080p.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+                <div className="hero-overlay"></div>
             </div>
 
-            {/* Massive Typography Layer */}
-            <h1 className="mega-title" style={{
-                position: 'relative',
-                zIndex: 1,
-                textAlign: 'center',
-                mixBlendMode: 'overlay',
-                color: 'var(--color-white)',
-                opacity: 0.9,
-                lineHeight: 0.8
-            }}>
-                CLUB DEPORTIVO<br />
-                <span style={{ color: 'transparent', WebkitTextStroke: '2px var(--color-neon)' }}>NOPALEROS</span>
-            </h1>
+            {/* Content */}
+            <div className="hero-content">
+                <div className="hero-badge">
+                    <span>EST. 2020</span>
+                    <span className="divider">•</span>
+                    <span>AUSTIN, TX</span>
+                </div>
 
-            {/* Layer interaction helper - Floating elements could go here */}
+                <h1 className="hero-title">
+                    <span className="title-line title-line-1">CLUB</span>
+                    <span className="title-line title-line-2">DEPORTIVO</span>
+                    <span className="title-line title-line-3 text-gradient">NOPALEROS</span>
+                </h1>
 
-            {/* CTA Container */}
-            <div style={{
-                position: 'absolute',
-                bottom: '15%',
-                display: 'flex',
-                gap: '1.5rem',
-                zIndex: 10,
-                alignItems: 'center'
-            }}>
-                <button className="btn-primary">
-                    Join the Squad
-                </button>
-                <button className="btn-outline">
-                    Buy the Kit
-                </button>
-                <a href="#fixtures" style={{
-                    color: 'var(--color-light)',
-                    textDecoration: 'underline',
-                    textUnderlineOffset: '4px',
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 700,
-                    textTransform: 'uppercase'
-                }}>
-                    See Fixtures
-                </a>
+                <p className="hero-tagline">
+                    Siempre Espinosos — Stay Pricked Up
+                </p>
+
+                <div className="hero-cta">
+                    <a href="#join" className="btn btn-primary">
+                        Join the Squad
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <a href="#fixtures" className="btn btn-outline">
+                        View Fixtures
+                    </a>
+                </div>
             </div>
-        </div>
+
+            {/* Scroll Indicator */}
+            <div className="hero-scroll">
+                <span>Scroll</span>
+                <div className="scroll-line"></div>
+            </div>
+
+            {/* Stats Strip */}
+            <div className="hero-stats">
+                <div className="stat">
+                    <span className="stat-value">3-2</span>
+                    <span className="stat-label">Last Match</span>
+                </div>
+                <div className="stat">
+                    <span className="stat-value">1st</span>
+                    <span className="stat-label">AMSA D3</span>
+                </div>
+                <div className="stat">
+                    <span className="stat-value">24</span>
+                    <span className="stat-label">Squad Size</span>
+                </div>
+            </div>
+        </section>
     )
 }
 

@@ -1,134 +1,158 @@
-import React from 'react'
+import { useState } from 'react'
+import './Roster.css'
 
 const players = [
-    { name: 'GREYSON', role: 'CM', rating: 91, stats: { pac: 88, sho: 85, pas: 90, dri: 87, def: 82, phy: 85 }, image: null },
-    { name: 'KEVIN', role: 'CAM', rating: 89, stats: { pac: 85, sho: 84, pas: 92, dri: 89, def: 45, phy: 70 }, image: null },
-    { name: 'MANEEL', role: 'CB', rating: 88, stats: { pac: 78, sho: 40, pas: 75, dri: 72, def: 90, phy: 86 }, image: null },
-    { name: 'HOMERO', role: 'ST', rating: 92, stats: { pac: 89, sho: 94, pas: 78, dri: 88, def: 35, phy: 78 }, image: null },
-    { name: 'MATIAS', role: 'MGR', rating: 99, stats: { pac: 70, sho: 80, pas: 99, dri: 85, def: 60, phy: 80 }, image: null },
-    { name: 'JORGE', role: 'RW', rating: 86, stats: { pac: 92, sho: 81, pas: 78, dri: 86, def: 40, phy: 65 }, image: null },
+    {
+        name: 'Homero',
+        position: 'ST',
+        number: 9,
+        rating: 92,
+        nationality: '🇲🇽',
+        stats: { pace: 89, shooting: 94, passing: 78, dribbling: 88, defense: 35, physical: 78 },
+        image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80'
+    },
+    {
+        name: 'Greyson',
+        position: 'CM',
+        number: 8,
+        rating: 91,
+        nationality: '🇺🇸',
+        stats: { pace: 88, shooting: 85, passing: 90, dribbling: 87, defense: 82, physical: 85 },
+        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80'
+    },
+    {
+        name: 'Kevin',
+        position: 'CAM',
+        number: 10,
+        rating: 89,
+        nationality: '🇲🇽',
+        stats: { pace: 85, shooting: 84, passing: 92, dribbling: 89, defense: 45, physical: 70 },
+        image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80'
+    },
+    {
+        name: 'Maneel',
+        position: 'CB',
+        number: 4,
+        rating: 88,
+        nationality: '🇮🇳',
+        stats: { pace: 78, shooting: 40, passing: 75, dribbling: 72, defense: 90, physical: 86 },
+        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80'
+    },
+    {
+        name: 'Matias',
+        position: 'MGR',
+        number: 23,
+        rating: 99,
+        nationality: '🇦🇷',
+        stats: { pace: 70, shooting: 80, passing: 99, dribbling: 85, defense: 60, physical: 80 },
+        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80'
+    },
+    {
+        name: 'Sebastian',
+        position: 'RW',
+        number: 7,
+        rating: 90,
+        nationality: '🇲🇽',
+        stats: { pace: 95, shooting: 86, passing: 82, dribbling: 91, defense: 42, physical: 68 },
+        image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&q=80'
+    },
 ]
 
 const Roster = () => {
+    const [activeCard, setActiveCard] = useState(null)
+
     return (
-        <section id="squad" style={{ padding: '4rem 2rem', background: 'var(--color-dark)' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: '3rem', fontSize: '3rem', color: 'var(--color-white)' }}>
-                THE <span className="text-gradient">PRICKLY POSSE</span>
-            </h2>
-
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '2rem',
-                marginTop: '2rem'
-            }}>
-                {players.map((player) => (
-                    <div key={player.name} className="fut-card" style={{
-                        position: 'relative',
-                        width: '240px',
-                        height: '360px',
-                        margin: '0 auto',
-                        background: `radial-gradient(circle at 50% 0, var(--color-gold), var(--color-primary))`,
-                        borderRadius: '1.5rem',
-                        padding: '1rem',
-                        boxShadow: '0 0 15px rgba(0,0,0,0.5)',
-                        border: '2px solid #d4af37',
-                        color: '#1a1a1a',
-                        overflow: 'hidden',
-                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                        cursor: 'pointer'
-                    }}>
-                        {/* Gloss Effect */}
-                        <div style={{
-                            position: 'absolute',
-                            inset: 0,
-                            background: 'linear-gradient(125deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.1) 100%)',
-                            zIndex: 2,
-                            pointerEvents: 'none'
-                        }} />
-
-                        {/* Rating & Position */}
-                        <div style={{ position: 'absolute', top: '2rem', left: '1.5rem', textAlign: 'center', zIndex: 3 }}>
-                            <div style={{ fontSize: '2.5rem', fontWeight: 900, lineHeight: 1 }}>{player.rating}</div>
-                            <div style={{ fontSize: '1rem', fontWeight: 600 }}>{player.role}</div>
-                            <div style={{ width: '30px', height: '2px', background: 'rgba(0,0,0,0.5)', margin: '4px auto' }} />
-                            <span style={{ fontSize: '1.5rem' }}>🇲🇽</span>
-                        </div>
-
-                        {/* Player Image Placeholder */}
-                        <div style={{
-                            position: 'absolute',
-                            top: '3.5rem',
-                            right: '1rem',
-                            width: '140px',
-                            height: '140px',
-                            background: 'rgba(0,0,0,0.2)',
-                            borderRadius: '50%', // Or silhouette cut out
-                            zIndex: 1,
-                            filter: 'drop-shadow(5px 5px 5px rgba(0,0,0,0.3))'
-                        }}>
-                            {/* Image would go here */}
-                        </div>
-
-                        {/* Name */}
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '35%',
-                            left: 0,
-                            width: '100%',
-                            textAlign: 'center',
-                            fontFamily: 'var(--font-display)',
-                            fontWeight: 900,
-                            fontSize: '1.5rem',
-                            textTransform: 'uppercase',
-                            zIndex: 3,
-                            letterSpacing: '0.05em'
-                        }}>
-                            {player.name}
-                        </div>
-
-                        {/* Stats Divider */}
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '30%',
-                            left: '10%',
-                            width: '80%',
-                            height: '1px',
-                            background: 'rgba(0,0,0,0.3)',
-                            zIndex: 3
-                        }} />
-
-                        {/* Stats Grid */}
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '2rem',
-                            left: '1rem',
-                            right: '1rem',
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
-                            gap: '0.25rem',
-                            fontSize: '0.9rem',
-                            fontWeight: 700,
-                            zIndex: 3
-                        }}>
-                            <div>{player.stats.pac} PAC</div>
-                            <div>{player.stats.dri} DRI</div>
-                            <div>{player.stats.sho} SHO</div>
-                            <div>{player.stats.def} DEF</div>
-                            <div>{player.stats.pas} PAS</div>
-                            <div>{player.stats.phy} PHY</div>
-                        </div>
+        <section id="squad" className="roster">
+            <div className="roster-container">
+                <div className="roster-header">
+                    <div>
+                        <span className="section-subtitle">The Squad</span>
+                        <h2 className="section-title">
+                            The Prickly<br />
+                            <span className="text-gradient">Posse</span>
+                        </h2>
                     </div>
-                ))}
-            </div>
+                    <p className="roster-description">
+                        Meet the warriors who wear the Nopal with pride. Built different. Always prickly.
+                    </p>
+                </div>
 
-            {/* Dynamic Style for Hover */}
-            <style>{`
-        .fut-card:hover {
-          transform: translateY(-10px) scale(1.02);
-          box-shadow: 0 10px 30px rgba(0, 255, 133, 0.4);
-        }
-      `}</style>
+                <div className="roster-grid">
+                    {players.map((player, index) => (
+                        <div
+                            key={player.name}
+                            className={`player-card ${activeCard === index ? 'active' : ''}`}
+                            onMouseEnter={() => setActiveCard(index)}
+                            onMouseLeave={() => setActiveCard(null)}
+                            style={{ '--delay': `${index * 0.1}s` }}
+                        >
+                            {/* Card Glow */}
+                            <div className="card-glow"></div>
+
+                            {/* Card Inner */}
+                            <div className="card-inner">
+                                {/* Top Section */}
+                                <div className="card-header">
+                                    <div className="player-rating">
+                                        <span className="rating-number">{player.rating}</span>
+                                        <span className="rating-position">{player.position}</span>
+                                    </div>
+                                    <span className="player-nationality">{player.nationality}</span>
+                                </div>
+
+                                {/* Player Image */}
+                                <div className="player-image">
+                                    <img src={player.image} alt={player.name} />
+                                    <div className="image-overlay"></div>
+                                </div>
+
+                                {/* Player Info */}
+                                <div className="player-info">
+                                    <span className="player-number">#{player.number}</span>
+                                    <h3 className="player-name">{player.name}</h3>
+                                </div>
+
+                                {/* Stats */}
+                                <div className="player-stats">
+                                    <div className="stat-item">
+                                        <span className="stat-value">{player.stats.pace}</span>
+                                        <span className="stat-label">PAC</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-value">{player.stats.shooting}</span>
+                                        <span className="stat-label">SHO</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-value">{player.stats.passing}</span>
+                                        <span className="stat-label">PAS</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-value">{player.stats.dribbling}</span>
+                                        <span className="stat-label">DRI</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-value">{player.stats.defense}</span>
+                                        <span className="stat-label">DEF</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-value">{player.stats.physical}</span>
+                                        <span className="stat-label">PHY</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Holographic Effect */}
+                            <div className="card-holo"></div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="roster-cta">
+                    <a href="#join" className="btn btn-outline">
+                        View Full Roster
+                    </a>
+                </div>
+            </div>
         </section>
     )
 }
