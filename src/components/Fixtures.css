@@ -3,6 +3,30 @@
     background: var(--color-surface);
 }
 
+/* Scroll Animations */
+.fixtures .fixtures-header {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fixtures.in-view .fixtures-header {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fixtures .match-card {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s ease;
+    transition-delay: var(--delay);
+}
+
+.fixtures.in-view .match-card {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .fixtures-container {
     max-width: 900px;
     margin: 0 auto;

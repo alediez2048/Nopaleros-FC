@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './Roster.css'
 
 const players = [
@@ -60,6 +60,31 @@ const players = [
 
 const Roster = () => {
     const [activeCard, setActiveCard] = useState(null)
+    const cardRefs = useRef([])
+
+    const handleCardMouseMove = (e, index) => {
+        const card = cardRefs.current[index]
+        if (!card) return
+
+        const rect = card.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        const centerX = rect.width / 2
+        const centerY = rect.height / 2
+
+        const rotateX = ((y - centerY) / centerY) * -10
+        const rotateY = ((x - centerX) / centerX) * 10
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`
+    }
+
+    const handleCardMouseLeave = (index) => {
+        const card = cardRefs.current[index]
+        if (!card) return
+        card.style.transform = ''
+        setActiveCard(null)
+    }
 
     return (
         <section id="squad" className="roster">
@@ -81,9 +106,11 @@ const Roster = () => {
                     {players.map((player, index) => (
                         <div
                             key={player.name}
+                            ref={el => cardRefs.current[index] = el}
                             className={`player-card ${activeCard === index ? 'active' : ''}`}
+                            onMouseMove={(e) => handleCardMouseMove(e, index)}
                             onMouseEnter={() => setActiveCard(index)}
-                            onMouseLeave={() => setActiveCard(null)}
+                            onMouseLeave={() => handleCardMouseLeave(index)}
                             style={{ '--delay': `${index * 0.1}s` }}
                         >
                             {/* Card Glow */}

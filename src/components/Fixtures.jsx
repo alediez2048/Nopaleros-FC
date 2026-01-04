@@ -1,3 +1,4 @@
+import { useInView } from '../hooks/useInView'
 import './Fixtures.css'
 
 const matches = [
@@ -40,8 +41,10 @@ const matches = [
 ]
 
 const Fixtures = () => {
+    const [sectionRef, isVisible] = useInView({ threshold: 0.15 })
+
     return (
-        <section id="fixtures" className="fixtures">
+        <section id="fixtures" className={`fixtures ${isVisible ? 'in-view' : ''}`} ref={sectionRef}>
             <div className="fixtures-container">
                 <div className="fixtures-header">
                     <div>
@@ -51,8 +54,12 @@ const Fixtures = () => {
                 </div>
 
                 <div className="fixtures-list">
-                    {matches.map((match) => (
-                        <div key={match.id} className={`match-card ${match.status}`}>
+                    {matches.map((match, index) => (
+                        <div
+                            key={match.id}
+                            className={`match-card ${match.status}`}
+                            style={{ '--delay': `${index * 0.1}s` }}
+                        >
                             {/* Match Meta */}
                             <div className="match-meta">
                                 <span className="match-competition">{match.competition}</span>

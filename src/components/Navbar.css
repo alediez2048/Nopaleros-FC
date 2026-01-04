@@ -1,3 +1,14 @@
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--color-accent);
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -32,8 +43,14 @@
     text-decoration: none;
 }
 
-.logo-icon {
-    font-size: 2rem;
+.logo-crest {
+    height: 65px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover .logo-crest {
+    transform: scale(1.05);
 }
 
 .logo-text {
@@ -88,6 +105,15 @@
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+.nav-link.active {
+    color: var(--color-accent);
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background: var(--color-accent);
 }
 
 /* CTA */
@@ -173,5 +199,42 @@
     .navbar-toggle {
         display: flex;
         z-index: 1001;
+    }
+
+    .navbar-container {
+        padding: 0 1rem;
+    }
+
+    .logo-crest {
+        height: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 1rem 0;
+    }
+
+    .navbar.scrolled {
+        padding: 0.75rem 0;
+    }
+
+    .logo-crest {
+        height: 45px;
+    }
+
+    .mobile-link {
+        font-size: 2rem;
+        padding: 1rem;
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-toggle {
+        padding: 1rem;
+        min-width: 48px;
+        min-height: 48px;
     }
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import heroVideo from '../assets/Video/4440941-hd_1920_1080_25fps.mp4'
 import './Hero.css'
 
 const Hero = () => {
@@ -9,8 +10,8 @@ const Hero = () => {
             if (!heroRef.current) return
             const { clientX, clientY } = e
             const { innerWidth, innerHeight } = window
-            const x = (clientX / innerWidth - 0.5) * 20
-            const y = (clientY / innerHeight - 0.5) * 20
+            const x = (clientX / innerWidth - 0.5) * 30
+            const y = (clientY / innerHeight - 0.5) * 30
             heroRef.current.style.setProperty('--mouse-x', `${x}px`)
             heroRef.current.style.setProperty('--mouse-y', `${y}px`)
         }
@@ -20,73 +21,80 @@ const Hero = () => {
 
     return (
         <section className="hero" ref={heroRef}>
-            {/* Background Video/Image */}
+            {/* Background */}
             <div className="hero-media">
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    poster="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1920&q=80"
-                >
-                    <source
-                        src="https://cdn.coverr.co/videos/coverr-soccer-ball-on-grass-2200/1080p.mp4"
-                        type="video/mp4"
-                    />
-                </video>
+                    src={heroVideo}
+                />
                 <div className="hero-overlay"></div>
+                <div className="hero-grain"></div>
             </div>
 
-            {/* Content */}
+            {/* Side Text */}
+            <div className="hero-side-text">
+                <span>SIEMPRE</span>
+                <span>ESPINOSOS</span>
+                <span className="accent">🌵</span>
+            </div>
+
+            {/* Main Content */}
             <div className="hero-content">
+                {/* Badge */}
                 <div className="hero-badge">
-                    <span>EST. 2020</span>
-                    <span className="divider">•</span>
-                    <span>AUSTIN, TX</span>
+                    EST. 2020 — AUSTIN, TX
                 </div>
 
+                {/* Massive Title with Glitch */}
                 <h1 className="hero-title">
-                    <span className="title-line title-line-1">CLUB</span>
-                    <span className="title-line title-line-2">DEPORTIVO</span>
-                    <span className="title-line title-line-3 text-gradient">NOPALEROS</span>
+                    <span className="title-line small">CLUB DEPORTIVO</span>
+                    <span className="title-line glitch" data-text="NOPALEROS">NOPALEROS</span>
                 </h1>
 
+                {/* Original Tagline */}
                 <p className="hero-tagline">
-                    Siempre Espinosos — Stay Pricked Up
+                    <span className="tagline-em">FOOTY, FAMILY, FOOD.</span> <span className="tagline-accent">STAY PRICKED UP.</span>
                 </p>
 
+                {/* CTA */}
                 <div className="hero-cta">
                     <a href="#join" className="btn btn-primary">
-                        Join the Squad
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        JOIN THE SQUAD
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                             <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </a>
                     <a href="#fixtures" className="btn btn-outline">
-                        View Fixtures
+                        SEE FIXTURES
                     </a>
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="hero-scroll">
-                <span>Scroll</span>
-                <div className="scroll-line"></div>
-            </div>
+            {/* Bottom Strip */}
+            <div className="hero-bottom">
+                <div className="stat-strip">
+                    <div className="stat-item">
+                        <span className="stat-value">3-2</span>
+                        <span className="stat-label">LAST W</span>
+                    </div>
+                    <div className="stat-divider"></div>
+                    <div className="stat-item">
+                        <span className="stat-value">#1</span>
+                        <span className="stat-label">AMSA D3</span>
+                    </div>
+                    <div className="stat-divider"></div>
+                    <div className="stat-item">
+                        <span className="stat-value">24</span>
+                        <span className="stat-label">PRICKLY POSSE</span>
+                    </div>
+                </div>
 
-            {/* Stats Strip */}
-            <div className="hero-stats">
-                <div className="stat">
-                    <span className="stat-value">3-2</span>
-                    <span className="stat-label">Last Match</span>
-                </div>
-                <div className="stat">
-                    <span className="stat-value">1st</span>
-                    <span className="stat-label">AMSA D3</span>
-                </div>
-                <div className="stat">
-                    <span className="stat-value">24</span>
-                    <span className="stat-label">Squad Size</span>
+                <div className="scroll-indicator">
+                    <span>SCROLL</span>
+                    <div className="scroll-line"></div>
                 </div>
             </div>
         </section>

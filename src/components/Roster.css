@@ -1,19 +1,20 @@
 .roster {
     padding: var(--section-padding) 0;
-    background: linear-gradient(to bottom, var(--color-dark), var(--color-surface));
+    background: linear-gradient(to bottom, var(--color-black), var(--color-surface));
+    position: relative;
 }
 
 .roster-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 3rem;
 }
 
 .roster-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     flex-wrap: wrap;
     gap: 2rem;
 }
@@ -24,59 +25,64 @@
     font-size: 1.1rem;
 }
 
-/* Grid */
+/* Grid - 4 per row, bigger cards */
 .roster-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 5rem;
 }
 
-/* Player Card */
+/* Player Card - Aggressive Style */
 .player-card {
     position: relative;
     aspect-ratio: 3/4;
+    min-height: 420px;
     cursor: pointer;
     perspective: 1000px;
-    animation: fadeInUp 0.6s var(--transition-smooth) backwards;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: cardReveal 0.6s var(--transition-smooth) forwards;
     animation-delay: var(--delay);
+}
+
+@keyframes cardReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .card-glow {
     position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg,
-            var(--color-accent) 0%,
-            var(--color-gold) 50%,
-            var(--color-hot-pink) 100%);
+    inset: -3px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-danger) 100%);
     opacity: 0;
-    filter: blur(20px);
-    transition: opacity 0.4s var(--transition-smooth);
+    filter: blur(25px);
+    transition: opacity 0.4s ease;
     z-index: -1;
 }
 
 .player-card:hover .card-glow {
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .card-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(160deg,
-            rgba(0, 255, 135, 0.15) 0%,
-            rgba(13, 31, 13, 0.95) 30%,
-            var(--color-primary) 100%);
-    border: 1px solid rgba(0, 255, 135, 0.2);
-    padding: 1.25rem;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: transform 0.4s var(--transition-smooth);
+    transition: transform 0.1s ease-out, border-color 0.3s ease;
+    transform-style: preserve-3d;
 }
 
 .player-card:hover .card-inner {
-    transform: translateY(-8px);
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--color-accent);
 }
 
 /* Card Header */
@@ -84,7 +90,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(to bottom, rgba(0, 255, 135, 0.1), transparent);
 }
 
 .player-rating {
@@ -95,20 +102,22 @@
 
 .rating-number {
     font-family: var(--font-display);
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     line-height: 1;
-    color: var(--color-gold);
+    color: var(--color-accent);
+    text-shadow: 0 0 30px rgba(0, 255, 135, 0.5);
 }
 
 .rating-position {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-family: var(--font-secondary);
+    font-size: 1rem;
     letter-spacing: 0.1em;
-    color: var(--color-accent);
+    color: var(--color-white);
+    margin-top: 0.25rem;
 }
 
 .player-nationality {
-    font-size: 1.75rem;
+    font-size: 2rem;
 }
 
 /* Player Image */
@@ -118,7 +127,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0.5rem 0;
     overflow: hidden;
 }
 
@@ -127,49 +135,49 @@
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    filter: grayscale(30%) contrast(1.1);
-    transition: all 0.4s var(--transition-smooth);
+    filter: grayscale(100%) contrast(1.3);
+    transition: all 0.5s ease;
 }
 
 .player-card:hover .player-image img {
-    filter: grayscale(0%) contrast(1);
-    transform: scale(1.05);
+    filter: grayscale(0%) contrast(1.1);
+    transform: scale(1.1);
 }
 
 .image-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top,
-            var(--color-primary) 0%,
-            transparent 60%);
+    background: linear-gradient(to top, #0a0a0a 0%, transparent 60%);
 }
 
 /* Player Info */
 .player-info {
-    text-align: center;
-    margin-bottom: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--color-black);
 }
 
 .player-number {
+    font-family: var(--font-body);
     font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--color-text-dim);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
 }
 
 .player-name {
     font-family: var(--font-display);
-    font-size: 1.75rem;
-    color: var(--color-text);
+    font-size: 2rem;
+    color: var(--color-white);
     margin-top: 0.25rem;
+    line-height: 1;
 }
 
 /* Stats */
 .player-stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    padding-top: 0.75rem;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    background: var(--color-surface);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -177,39 +185,46 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0.75rem 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-item:last-child {
+    border-right: none;
 }
 
 .stat-value {
     font-family: var(--font-display);
     font-size: 1.25rem;
-    color: var(--color-text);
+    color: var(--color-white);
 }
 
 .stat-label {
-    font-size: 0.6rem;
-    font-weight: 600;
+    font-size: 0.55rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
     color: var(--color-text-dim);
+    margin-top: 0.1rem;
 }
 
-/* Holographic Effect */
+/* Holographic Effect - More Aggressive */
 .card-holo {
     position: absolute;
     inset: 0;
     background: linear-gradient(125deg,
             transparent 0%,
-            rgba(255, 255, 255, 0.1) 25%,
+            rgba(0, 255, 135, 0.15) 25%,
             transparent 50%,
-            rgba(255, 255, 255, 0.05) 75%,
+            rgba(255, 49, 49, 0.1) 75%,
             transparent 100%);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.4s var(--transition-smooth);
+    transition: opacity 0.4s ease;
 }
 
 .player-card:hover .card-holo {
     opacity: 1;
-    animation: holoShine 1.5s ease-in-out infinite;
+    animation: holoShine 1s ease-in-out infinite;
 }
 
 @keyframes holoShine {
@@ -229,27 +244,59 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .roster-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
-    .card-inner {
-        padding: 1rem;
-    }
-
-    .rating-number {
-        font-size: 2rem;
-    }
-
-    .player-name {
-        font-size: 1.25rem;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 900px) {
     .roster-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .player-card {
+        min-height: 380px;
+    }
+
+    .rating-number {
+        font-size: 2.5rem;
+    }
+
+    .player-name {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .roster-container {
+        padding: 0 1rem;
+    }
+
+    .roster-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .player-card {
+        min-height: 450px;
+    }
+
+    .player-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .roster-header {
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .roster-description {
+        text-align: center;
     }
 }
