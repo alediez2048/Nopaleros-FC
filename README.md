@@ -8,6 +8,8 @@ Live: https://alediez2048.github.io/Nopaleros-FC/
 
 A video hero with a loading screen, About, Fixtures, Squad, Sponsors and a footer. Each section is a component in `src/components/` with its own stylesheet, and `useInView` (an IntersectionObserver hook in `src/hooks/`) triggers the entrance animations as sections scroll into view.
 
+The hero and background videos in `src/assets/Video` are free stock footage from Pexels.
+
 Player photos in the squad section are placeholder stock images until the club supplies real ones.
 
 ## Stack
