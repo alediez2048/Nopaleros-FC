@@ -1,16 +1,26 @@
-# React + Vite
+# Club Deportivo Nopaleros
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A website for an amateur football club: club story, upcoming fixtures, the squad, and sponsors.
 
-Currently, two official plugins are available:
+Live: https://alediez2048.github.io/Nopaleros-FC/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Sections
 
-## React Compiler
+A video hero with a loading screen, About, Fixtures, Squad, Sponsors and a footer. Each section is a component in `src/components/` with its own stylesheet, and `useInView` (an IntersectionObserver hook in `src/hooks/`) triggers the entrance animations as sections scroll into view.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Player photos in the squad section are placeholder stock images until the club supplies real ones.
 
-## Expanding the ESLint configuration
+## Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+React 18 and Vite with plain CSS. No other runtime dependencies.
+
+## Run it
+
+```bash
+npm install
+npm run dev       # local dev server
+npm run lint      # ESLint
+npm run deploy    # build and publish dist/ to the gh-pages branch
+```
+
+The Vite `base` is `/Nopaleros-FC/` to match the GitHub Pages path.
